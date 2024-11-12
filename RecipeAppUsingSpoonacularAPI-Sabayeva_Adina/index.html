@@ -1,27 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <title>Document</title>
 </head>
 <body>
-  <div class="main">
-    <h1 style="text-align: center;">Spoonacular Recipes</h1>
-    <button onclick="loadFavorites()">View Favorites</button>
-  
-  <div class="favorites-wrapper">
-    <h2>Your Favorite Recipes</h2>
-    <!-- Favorite recipes will appear here -->
-  </div>
-
-    <main>
-      <div class="wrapper">
+  <div class="search-container">
+    <input type="text" id="searchBar" placeholder="Search for recipes..." autocomplete="off">
+    <div class="autocomplete-dropdown" id="autocompleteDropdown">
+      <ul id="autocompleteList"></ul>
+    </div>
+    <button type="submit" id="searchButton">
+      <div class="darksoul-dropdown" id="dropdown">
+        <ul id="resultlist">
+        </ul>
       </div>
-    </main>
-    
+    </button>
   </div>
+  <div id="recipeModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h1 id="modalTitle"></h1>
+      <img id="modalImage" alt="Recipe Image">
+      <div id="modalDescription"></div>
+      <h2>Ingredients</h2>
+      <ul id="modalIngredients"></ul>
+      <h2>Instructions</h2>
+      <p id="modalInstructions"></p>
+    </div>
+  </div>
+  <main>
+    <div class="wrapper">
+    </div>
+  </main>
+  <section class="favorites">
+    <button class="display_fav">
+      <p>favorites</p>
+    </button>
+    <div class="wrapper" id="wrapper1" data-my-favorites>
+  </section>
   <script src="api.js" defer></script>
 </body>
 </html>
