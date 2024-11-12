@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,3 +28,89 @@
     <script src="api.js" defer></script>
 </body>
 </html>
+=======
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/543bf0ce18.js" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>title</title>
+  <meta name="author" content="name">
+  <meta name="description" content="description here">
+  <meta name="keywords" content="keywords,here">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=font1|font2|etc" type="text/css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="weather-side">
+        <div class="weather-gradient">
+          <div class="date-container">
+            <h2 class="date-dayname" id="dayname"></h2>
+            <span class="date-day"></span>
+            <span class="sunrise"></span>
+            <span class="sunset"></span>
+
+            <i class="location-icon" data-feather="map-pin"></i>
+            <span class="location"></span>
+          </div>
+          <div class="weather-container">
+            <img class="weather-icon">            
+            <h1 class="weather-temp"></h1>
+            <h3 class="weather-desc"></h3>
+          </div>
+        </div>
+      </div>
+      <div class="info-side">
+        <div class="today-info-container">
+          <div class="today-info">
+            <div class="precipitation">
+            </div>
+            <div class="humidity">
+              <span class="title">HUMIDITY</span>
+              <span class="value" id="HUMIDITY"></span>
+              <div class="clear"></div>
+            </div>
+            <div class="wind">
+              <span class="title">WIND</span>
+              <span class="value" id="WIND"></span>
+              <div class="clear"></div>
+            </div>
+            <div class="pressure">
+              <span class="title">PRESSURE</span>
+              <span class="value" id="PRESSURE"></span>
+              <div class="clear"></div>
+            </div>
+            <div class="clouds">
+            </div>
+          </div>
+        </div>
+        <div class="week-container">
+          <ul class="week-list" id="week-list"> 
+          </ul>
+        </div>
+        <div class="location-container">
+          <button class="location-button" id="changeLocationBtn">
+            <i data-feather="map-pin"></i>
+            <span>Change location</span>
+          </button>
+          <button class="change-temp" id="changeTempBtn">
+            <span>°c/F</span>
+          </button>          
+        </div>
+      </div>  
+    </div>    
+    <div class="darksoul-search-bar" id="locationSearch" style="display: none;">
+      <input type="text" class="darksoul-search-bar-input" placeholder="Enter Location" autocomplete="on" id="weatherLocation">
+      <button type="submit" id="search">
+        <i class="fas fa-search"></i>
+        <div class="darksoul-dropdown" id="dropdown">
+          <ul id="resultlist">
+          </ul>
+       </div>
+      </button>
+    </div>
+    <script src="api.js" defer></script>
+  </body>
+</html>
+>>>>>>> 1ad18da (weather_final_0)
