@@ -1,83 +1,6 @@
-<<<<<<< HEAD
-const apiKey="0c680be25cd54d37a769ebe2d3b02e72";
-
-fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=1&addRecipeNutrition=true&sort=popularity`)
-.then((response) => response.json())
-  .then((data) => {
-    let recipeHtml = "";
-
-    data.results.forEach((recipe) => {
-      let ingredientsHtml = createIngredientsHtml(recipe.nutrition.ingredients);
-      
-      let nutrientsHtml = createNutrientsHtml(recipe.nutrition.nutrients);
-
-      recipeHtml += createRecipeHtml(recipe, ingredientsHtml, nutrientsHtml);
-    });
-
-    setRecipeHtml(recipeHtml);
-  });
-function createIngredientsHtml(ingredients) {
-  let ingredientsHtml = "";
-
-  ingredients.forEach((ingredient) => {
-    ingredientsHtml +=
-      "<li>" +
-      ingredient.name +
-      ": " +
-      ingredient.amount +
-      " " +
-      ingredient.unit +
-      "</li>";
-  });
-
-  return ingredientsHtml;
-}
-
-function createNutrientsHtml(nutrients) {
-  let nutrientsHtml = "";
-
-  for (let i = 0; i < 9; i++) {
-    const nutrient = nutrients[i];
-
-    nutrientsHtml +=
-      "<li>" +
-      nutrient.title +
-      ": " +
-      nutrient.amount +
-      nutrient.unit +
-      "</li>";
-  }
-
-  return nutrientsHtml;
-}
-
-function createRecipeHtml(recipe, ingredientsHtml, nutrientsHtml) {
-  let recipeHtml = "";
-  recipeHtml+='<div class="gallery-item">'
-  recipeHtml+='<figure>';
-  recipeHtml += '<img src="' + recipe.image + '" alt="recipe thumbnail" style="width: 100%; height: auto;" />';
-  recipeHtml += '</figure>';
-  recipeHtml += '<p>' + recipe.title + '</p>';
-  recipeHtml += '<div class="card-info">'
-  recipeHtml += '<p>Servings:<strong>'+recipe.servings+'</strong></p>'
-  recipeHtml += '<p>Ready in:<strong>'+recipe.readyInMinutes+' mins</strong></p>'
-  recipeHtml += '<p>Price per serv:<strong>'+recipe.pricePerServing+'$</strong></p>'
-  recipeHtml += '<p>Health score:<strong>'+recipe.healthScore+'</strong></p>'
-  recipeHtml += '</div>'
-  recipeHtml += '</div>';
-
-  return recipeHtml;
-}
-
-function setRecipeHtml(recipeHtml) {
-  let gallery = document.querySelector(".gallery");
-
-  gallery.innerHTML = recipeHtml;
-}
-=======
-const apiKey="924c7f14063e80b78d732ee729a98462";
+const apiKey = "924c7f14063e80b78d732ee729a98462";
 // const apiKey="934bba235903fa32d3181dc1ce9f6d03";
-let isCelsius = true; 
+let isCelsius = true;
 let data;
 
 const weatherLocationInput = document.getElementById("weatherLocation");
@@ -90,7 +13,7 @@ function search() {
     .then(response => response.json())
     .then(responseJson => {
       updateView(responseJson);
-      content.value = ""; 
+      content.value = "";
     });
 }
 
@@ -100,8 +23,8 @@ function searchForecast() {
     .then(currentResponse => currentResponse.json())
     .then(currentResponseJson => {
       updateForecast(currentResponseJson);
-      content.value = ""; 
-      data = currentResponseJson; 
+      content.value = "";
+      data = currentResponseJson;
     });
 }
 
@@ -170,7 +93,7 @@ function updateView(responseJson) {
 
 function updateForecast(data) {
   const weekList = document.getElementById("week-list");
-  weekList.innerHTML = ""; 
+  weekList.innerHTML = "";
 
   const dailyForecasts = data.list.filter(forecast => forecast.dt_txt.includes("12:00:00"));
   dailyForecasts.slice(0, 5).forEach(day => {
@@ -201,8 +124,8 @@ function fetchCitySuggestions(query) {
 }
 
 function showSuggestions(cities) {
-  resultlist.innerHTML = ""; 
-  dropdown.style.display = cities.length > 0 ? "block" : "none"; 
+  resultlist.innerHTML = "";
+  dropdown.style.display = cities.length > 0 ? "block" : "none";
   cities.forEach(city => {
     const listItem = document.createElement("li");
     listItem.textContent = `${city.name}, ${city.country}`;
@@ -213,7 +136,7 @@ function showSuggestions(cities) {
 
 function selectCity(cityName) {
   weatherLocationInput.value = cityName;
-  dropdown.style.display = "none"; 
+  dropdown.style.display = "none";
   search();
   searchForecast();
 }
@@ -222,7 +145,7 @@ weatherLocationInput.addEventListener("input", () => {
   if (query.length > 1) {
     fetchCitySuggestions(query);
   } else {
-    dropdown.style.display = "none"; 
+    dropdown.style.display = "none";
   }
 });
 
@@ -252,7 +175,7 @@ function toggleTemperatureUnit() {
 function updateForecastTemperatures() {
   const forecastItems = document.querySelectorAll("#week-list .day-temp");
   forecastItems.forEach(item => {
-    const tempValue = parseFloat(item.textContent.match(/-?\d+/)); 
+    const tempValue = parseFloat(item.textContent.match(/-?\d+/));
 
     if (isCelsius) {
       const celsiusTemp = (tempValue - 32) * (5 / 9);
@@ -279,4 +202,3 @@ document.getElementById("changeLocationBtn").addEventListener("click", () => {
   const locationSearch = document.getElementById("locationSearch");
   locationSearch.style.display = locationSearch.style.display === "none" ? "flex" : "none";
 });
->>>>>>> 1ad18da (weather_final_0)

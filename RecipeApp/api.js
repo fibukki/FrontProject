@@ -9,18 +9,18 @@
 // const apiKey ="02363275adea46d199a34266a31ea055";
 
 
-const API_KEY = 'ad7f90f4b68e420ab8fa11de2e849f45';
+const API_KEY = 'ba7be1a94ee64ab1bee19c501ee974bd';
 const API_BASE_URL = 'https://api.spoonacular.com/recipes';
-const favoriteButtonAttr = "data-add-to-favorite"; 
+const favoriteButtonAttr = "data-add-to-favorite";
 
-fetch(`${API_BASE_URL}/complexSearch?apiKey=${API_KEY}&number=1&addRecipeNutrition=true&sort=popularity`)
-  .then(function(response) { return response.json(); })
-  .then(function(data) {
+fetch(`${API_BASE_URL}/complexSearch?apiKey=${API_KEY}&number=10&addRecipeNutrition=true&sort=popularity`)
+  .then(function (response) { return response.json(); })
+  .then(function (data) {
     let recipeHtml = "";
-    data.results.forEach(function(recipe) {
+    data.results.forEach(function (recipe) {
       let ingredientsHtml = createIngredientsHtml(recipe.nutrition.ingredients);
       let nutrientsHtml = createNutrientsHtml(recipe.nutrition.nutrients);
-      recipeHtml += createRecipeHtml(recipe,true); 
+      recipeHtml += createRecipeHtml(recipe, true);
     });
     setRecipeHtml(recipeHtml);
     initializeFavoriteButtons();
@@ -35,26 +35,26 @@ function createRecipeHtml(recipe, ingredientsHtml = "", nutrientsHtml = "", incl
   recipeHtml += '<div class="tags">';
 
   if (recipe.cuisines && recipe.cuisines.length > 0) {
-    recipe.cuisines.forEach(function(element) {
+    recipe.cuisines.forEach(function (element) {
       recipeHtml += '<span class="tag">' + element + '</span>';
     });
   }
 
   if (recipe.diets && recipe.diets.length > 0) {
-    recipe.diets.forEach(function(element) {
+    recipe.diets.forEach(function (element) {
       recipeHtml += '<span class="tag">' + element + '</span>';
     });
   }
 
-  recipeHtml += '</div>'; 
+  recipeHtml += '</div>';
   recipeHtml += '<p>' + recipe.summary.slice(0, 100) + '...</p>';
 
   if (includeFavButton) {
     recipeHtml += '<button ' + favoriteButtonAttr + '="' + recipe.id + '"><div class="heart-wrapper"><i class="far fa-heart"></i></div></button>';
   }
 
-  recipeHtml += '</div>'; 
-  recipeHtml += '</div>'; 
+  recipeHtml += '</div>';
+  recipeHtml += '</div>';
   return recipeHtml;
 }
 
@@ -81,13 +81,13 @@ class FavoritesList {
 
   initButton(button) {
     const id = String(button.getAttribute(favoriteButtonAttr));
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       const heartIcon = button.querySelector(".fa-heart");
 
       if (!this.list.includes(id)) {
         this.list.push(id);
       } else {
-        this.list = this.list.filter(function(item) { return item !== id; });
+        this.list = this.list.filter(function (item) { return item !== id; });
       }
 
       this.setState(id, heartIcon);
@@ -111,7 +111,7 @@ class FavoritesList {
   }
 
   initClearButton(button) {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       window.localStorage.removeItem(this.storageName);
       this.list = [];
       this.updateHtmlList([]);
@@ -120,16 +120,16 @@ class FavoritesList {
 
   async updateHtmlList(list) {
     const favoritesHTMLElement = document.querySelector('#wrapper1');
-    
+
     if (list.length > 0) {
       const newList = list.slice(0).reverse();
       favoritesHTMLElement.innerHTML = '';
-  
+
       for (const itemId of newList) {
         try {
           const recipe = await fetchRecipeData(itemId);
           if (recipe) {
-            let recipeHtml = createRecipeHtml(recipe, "", "", false); 
+            let recipeHtml = createRecipeHtml(recipe, "", "", false);
             const htmlDiv = document.createElement('div');
             htmlDiv.classList.add('favorite-card');
             htmlDiv.innerHTML = recipeHtml;
@@ -170,12 +170,12 @@ async function fetchRecipeData(recipeId) {
 
 function initializeFavoriteButtons() {
   const buttons = document.querySelectorAll(`[${favoriteButtonAttr}]`);
-  buttons.forEach(function(button) { favorites.initButton(button); });
+  buttons.forEach(function (button) { favorites.initButton(button); });
 }
 
 function createIngredientsHtml(ingredients) {
   let ingredientsHtml = "";
-  ingredients.forEach(function(ingredient) {
+  ingredients.forEach(function (ingredient) {
     ingredientsHtml += '<li>' + ingredient.name + ': ' + ingredient.amount + ' ' + ingredient.unit + '</li>';
   });
   return ingredientsHtml;
@@ -183,7 +183,7 @@ function createIngredientsHtml(ingredients) {
 
 function createNutrientsHtml(nutrients) {
   let nutrientsHtml = "";
-  nutrients.slice(0, 9).forEach(function(nutrient) {
+  nutrients.slice(0, 9).forEach(function (nutrient) {
     nutrientsHtml += '<li>' + nutrient.title + ': ' + nutrient.amount + nutrient.unit + '</li>';
   });
   return nutrientsHtml;
@@ -199,11 +199,11 @@ const wrapper1 = document.getElementById('wrapper1');
 
 wrapper1.style.display = 'none';
 
-displayFavButton.addEventListener('click', function() {
+displayFavButton.addEventListener('click', function () {
   if (wrapper1.style.display === 'none' || wrapper1.style.display === '') {
-    wrapper1.style.display = 'flex'; 
+    wrapper1.style.display = 'flex';
   } else {
-    wrapper1.style.display = 'none'; 
+    wrapper1.style.display = 'none';
   }
 });
 
@@ -223,24 +223,24 @@ const closeButton = document.querySelector('.close-button');
 function openModal(recipe) {
   modalTitle.textContent = recipe.title;
   modalImage.src = recipe.image;
-  modalDescription.innerHTML=recipe.summary;
+  modalDescription.innerHTML = recipe.summary;
   modalIngredients.innerHTML = '';
-  recipe.extendedIngredients.forEach(function(ingredient) {
+  recipe.extendedIngredients.forEach(function (ingredient) {
     const listItem = document.createElement('li');
     listItem.textContent = `${ingredient.name}: ${ingredient.amount.toFixed(1)} ${ingredient.unit}`;
     modalIngredients.appendChild(listItem);
   });
-  modalNutrients.innerHTML= createNutrientsHtml(recipe)
+  // modalNutrients.innerHTML = createNutrientsHtml(recipe)
   modalInstructions.innerHTML = recipe.instructions;
 
   recipeModal.style.display = 'block';
 }
 
-closeButton.addEventListener('click', function() {
+closeButton.addEventListener('click', function () {
   recipeModal.style.display = 'none';
 });
 
-window.addEventListener('click', function(event) {
+window.addEventListener('click', function (event) {
   if (event.target === recipeModal) {
     recipeModal.style.display = 'none';
   }
@@ -248,9 +248,9 @@ window.addEventListener('click', function(event) {
 
 async function fetchAndShowRecipeDetails(recipeId) {
   try {
-    const recipe = await fetchRecipeData(recipeId); 
+    const recipe = await fetchRecipeData(recipeId);
     if (recipe) {
-      openModal(recipe); 
+      openModal(recipe);
     }
   } catch (error) {
     console.error('Error fetching recipe details:', error);
@@ -266,13 +266,13 @@ function createRecipeHtml(recipe, includeFavButton = true) {
   recipeHtml += '<div class="tags">';
 
   if (recipe.cuisines && recipe.cuisines.length > 0) {
-    recipe.cuisines.forEach(function(element) {
+    recipe.cuisines.forEach(function (element) {
       recipeHtml += '<span class="tag">' + element + '</span>';
     });
   }
 
   if (recipe.diets && recipe.diets.length > 0) {
-    recipe.diets.forEach(function(element) {
+    recipe.diets.forEach(function (element) {
       recipeHtml += '<span class="tag">' + element + '</span>';
     });
   }
@@ -284,13 +284,13 @@ function createRecipeHtml(recipe, includeFavButton = true) {
     recipeHtml += '<button ' + favoriteButtonAttr + '="' + recipe.id + '"><div class="heart-wrapper"><i class="far fa-heart"></i></div></button>';
   }
 
-  recipeHtml += '</div>'; 
-  recipeHtml += '</div>'; 
+  recipeHtml += '</div>';
+  recipeHtml += '</div>';
 
   return recipeHtml;
 }
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
   if (event.target.closest('.card')) {
     const recipeId = event.target.closest('.card').getAttribute('data-recipe-id');
     fetchAndShowRecipeDetails(recipeId);
@@ -298,7 +298,7 @@ document.addEventListener('click', function(event) {
 });
 
 //search
-let allRecipes = []; 
+let allRecipes = [];
 const searchBar = document.getElementById("searchBar");
 const searchButton = document.getElementById("searchButton");
 searchButton.addEventListener("click", () => {
@@ -308,14 +308,14 @@ searchButton.addEventListener("click", () => {
 
 async function fetchRecipes(ingredients = "") {
   try {
-    const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=1&apiKey=${API_KEY}`;
+    const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=5&apiKey=${API_KEY}`;
     const response = await fetch(url);
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    
+
     const basicData = await response.json();
-    
+
     const fullDetails = await Promise.all(basicData.map(recipe => fetchRecipeData(recipe.id)));
-    
+
     const validRecipes = fullDetails.filter(recipe => recipe !== null);
     displayRecipes(validRecipes);
   } catch (error) {
@@ -337,7 +337,7 @@ const autocompleteDropdown = document.getElementById("autocompleteDropdown");
 const autocompleteList = document.getElementById("autocompleteList");
 
 function fetchAutocompleteSuggestions(query) {
-  fetch(`${API_BASE_URL}/autocomplete?query=${query}&number=1&apiKey=${API_KEY}`)
+  fetch(`${API_BASE_URL}/autocomplete?query=${query}&number=3&apiKey=${API_KEY}`)
     .then(response => response.json())
     .then(data => {
       showAutocompleteSuggestions(data);
@@ -346,8 +346,8 @@ function fetchAutocompleteSuggestions(query) {
 }
 
 function showAutocompleteSuggestions(suggestions) {
-  autocompleteList.innerHTML = ""; 
-  autocompleteDropdown.style.display = suggestions.length > 0 ? "block" : "none"; 
+  autocompleteList.innerHTML = "";
+  autocompleteDropdown.style.display = suggestions.length > 0 ? "block" : "none";
   suggestions.forEach(suggestion => {
     const listItem = document.createElement("li");
     listItem.textContent = suggestion.title;
@@ -358,8 +358,8 @@ function showAutocompleteSuggestions(suggestions) {
 
 function selectSuggestion(selectedRecipe) {
   searchBar.value = selectedRecipe;
-  autocompleteDropdown.style.display = "none"; 
-  fetchRecipes(selectedRecipe); 
+  autocompleteDropdown.style.display = "none";
+  fetchRecipes(selectedRecipe);
 }
 
 searchBar.addEventListener("input", () => {
@@ -367,11 +367,10 @@ searchBar.addEventListener("input", () => {
   if (query.length > 1) {
     fetchAutocompleteSuggestions(query);
   } else {
-    autocompleteDropdown.style.display = "none"; // Hide dropdown if query is too short
+    autocompleteDropdown.style.display = "none";
   }
 });
 
-// Close the dropdown when clicking outside of it
 document.addEventListener("click", (event) => {
   if (!autocompleteDropdown.contains(event.target) && event.target !== searchBar) {
     autocompleteDropdown.style.display = "none";

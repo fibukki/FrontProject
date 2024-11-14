@@ -1,199 +1,3 @@
-<<<<<<< HEAD
-body,
-html {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding-bottom: 2em;
-}
-
-a {
-  color: rgb(255, 149, 10);
-  text-decoration: none;
-}
-
-a:hover {
-  color: white;
-  background-color: rgb(255, 149, 10);
-}
-
-h1 {
-  margin: 3em 0 2em 0;
-}
-
-h2 {
-  text-align: center;
-  margin: 2em 0;
-}
-
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-article {
-  display: flex;
-  flex-direction: column;
-  padding: 0.5em 6em 3.5em 6em;
-  max-width: 600px;
-  margin: 1em 1em 1em 0;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
-}
-
-.summary {
-  margin-bottom: 1em;
-  line-height: 1.5;
-  font-size: 0.9em;
-  padding-bottom: 1em;
-}
-
-img {
-  float: left;
-  margin: 0 1em 1em 0;
-  border-radius: 15px;
-}
-
-.ingredientsAndNutrients {
-  display: flex;
-  justify-content: space-evenly;
-  border-top: 1px solid rgb(216, 216, 216);
-}
-
-.ingredients,
-.nutrients {
-  padding: 0.5em 3em 1em 3em;
-  background-color: white;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 0.85em;
-}
-
-li {
-  line-height: 1.5;
-}
-.gallery {
-  max-width: 1200px;
-  margin: 0 auto;
-  column-count: 3;
-  font-family: arial;
-}
-.gallery-item {
-  break-inside: avoid;
-  margin-bottom: 16px;
-  position: relative;
-}
-.gallery-item figure {
-  margin: 0;
-  position: relative;
-}
-.gallery-item figcaption {
-  font-style: italic;
-  padding: 8px;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.5);
-  width: 236px;
-  box-sizing: border-box;
-  bottom: 3px;
-  color: #fff;
-  height: 30px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  border-radius: 0 0 14px 14px;
-}
-.gallery-item img {
-  border-radius: 14px;
-}
-.gallery-item p {
-  margin: 0;
-  padding: 8px;
-}
-.gallery-item:hover img {
-  transform: scale(1.05); 
-  opacity: 0.9; 
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-
-}
-.card-info {
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  position: absolute;
-  bottom: 60px;
-  left: 0px;
-  display: none;
-  right: 0px;
-  transform: translateY(100%);
-  transition: transform 0.3s;
-  text-align: center;
-}
-
-.gallery-item:hover .card-info {
-  transform: translateY(0px);
-  transition: transform 0.9s;
-  transform: scale(1.05); 
-  opacity: 0.9; 
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);  
-  display:block;
-  border-radius: 14px;
-
-}
-
-
-
-@media screen and (max-width: 500px) {
-  .gallery {
-    column-count: 1;
-  }
-}
-@media screen and (min-width: 501px) and (max-width: 700px) {
-  .gallery {
-    column-count: 2;
-  }
-}
-
-
-@media only screen and (max-width: 550px) {
-  main {
-    width: 100%;
-  }
-
-  article {
-    margin: 0;
-    padding: 0 0 2em 0;
-  }
-
-  img {
-    width: 100%;
-    border-radius: 0;
-  }
-
-  .summary {
-    padding: 0 2em;
-  }
-
-  .ingredientsAndNutrients {
-    flex-direction: column;
-  }
-
-  .ingredients,
-  .nutrients {
-    text-align: center;
-  }
-}
-=======
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap');
 
 :root {
@@ -614,6 +418,7 @@ span.sunrise {
     padding: 15px;
     box-sizing: border-box;
   }
+
   .weather-side,
   .info-side {
     width: 100%;
@@ -737,6 +542,7 @@ span.sunrise {
   .location {
     left: 0;
   }
+
   #locationSearch,
   .darksoul-search-bar {
     /* width: 100%; */
@@ -746,10 +552,11 @@ span.sunrise {
     height: 200px;
     border-radius: 100px;
   }
-  #search{
+
+  #search {
     left: -53px;
   }
-  
+
 }
 
 @media (max-width: 270px) {
@@ -771,4 +578,3 @@ span.sunrise {
     display: none;
   }
 }
->>>>>>> 1ad18da (weather_final_0)
